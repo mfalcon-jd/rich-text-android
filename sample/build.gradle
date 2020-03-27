@@ -29,6 +29,9 @@ android {
       debuggable false
       zipAlignEnabled true
       signingConfig signingConfigs.release
+      lintOptions {
+        disable 'MissingTranslation'
+      }
     }
   }
 }
