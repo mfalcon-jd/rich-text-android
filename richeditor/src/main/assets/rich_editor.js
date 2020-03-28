@@ -137,11 +137,25 @@ RE.setTextColor = function(color) {
     document.execCommand("styleWithCSS", null, false);
 }
 
-RE.setTextBackgroundColor = function(color) {
-    RE.restorerange();
+RE.setTextBackgroundColor = function(color, uuid) {
+    RE.restorerange();;
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
+    document.execCommand("copy", null, null);
+    RE.saveTags(uuid);
+};
+
+
+RE.saveTags = function(uuid){
+    var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
+    for (var i=0; i<array.length; i++)
+    {
+        var atributo = array[i].getAttribute('data-id')
+        if (atributo === null) {
+            array[i].setAttribute("data-id", uuid);
+        }
+    }
 }
 
 RE.setFontSize = function(fontSize){

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
@@ -219,6 +220,12 @@ public class RichEditor extends WebView {
 
   @Override public void setBackgroundColor(int color) {
     super.setBackgroundColor(color);
+  }
+
+  //Metodo para agregar fondo al texto
+  public void setTextBackGroundColor(Color color, String uuid){
+    exec("javascript:RE.prepareInsert();");
+    exec("javascript:RE.setTextBackgroundColor('" + color + "', '" + uuid + "');");
   }
 
   @Override public void setBackgroundResource(int resid) {
