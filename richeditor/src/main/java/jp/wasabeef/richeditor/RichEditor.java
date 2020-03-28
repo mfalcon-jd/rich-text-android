@@ -222,12 +222,6 @@ public class RichEditor extends WebView {
     super.setBackgroundColor(color);
   }
 
-  //Metodo para agregar fondo al texto
-  public void setTextBackGroundColor(Color color, String uuid){
-    exec("javascript:RE.prepareInsert();");
-    exec("javascript:RE.setTextBackgroundColor('" + color + "', '" + uuid + "');");
-  }
-
   @Override public void setBackgroundResource(int resid) {
     Bitmap bitmap = Utils.decodeResource(getContext(), resid);
     String base64 = Utils.toBase64(bitmap);
@@ -316,11 +310,12 @@ public class RichEditor extends WebView {
     exec("javascript:RE.setTextColor('" + hex + "');");
   }
 
-  public void setTextBackgroundColor(int color) {
+  //Metodo para agregar fondo al texto
+  public void setTextBackgroundColor(int color, String uuid) {
     exec("javascript:RE.prepareInsert();");
 
     String hex = convertHexColorString(color);
-    exec("javascript:RE.setTextBackgroundColor('" + hex + "');");
+    exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
   }
 
   public void setFontSize(int fontSize) {
