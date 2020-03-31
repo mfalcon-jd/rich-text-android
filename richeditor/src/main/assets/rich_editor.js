@@ -142,7 +142,7 @@ RE.setTextBackgroundColor = function(color, uuid) {
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
-    document.execCommand("copy", null, null);
+    document.execCommand("copy");
     RE.saveTags(uuid);
 };
 
@@ -154,7 +154,6 @@ RE.saveTags = function(uuid){
         var atributo = array[i].getAttribute('data-id')
         if (atributo === null) {
             array[i].setAttribute("data-id", uuid);
-            alert(array[i]);
         }
     }
 }
