@@ -143,9 +143,18 @@ RE.setTextBackgroundColor = function(color, uuid) {
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
     document.execCommand("copy");
+    RE.getTextSelected();
     RE.saveTags(uuid);
 };
 
+RE.getTextSelected = function(){
+   RE.editor.addEventListener('mouseup',
+       function(e) {
+           var text = document.getSelection().toString();
+           alert(text);
+       }
+    );
+}
 
 RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
