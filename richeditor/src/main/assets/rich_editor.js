@@ -154,6 +154,7 @@ RE.saveTags = function(uuid){
         var atributo = array[i].getAttribute('data-id')
         if (atributo === null) {
             array[i].setAttribute("data-id", uuid);
+            alert(array[i]);
         }
     }
 }
