@@ -138,7 +138,7 @@ RE.setTextColor = function(color) {
 }
 
 RE.setTextBackgroundColor = function(color, uuid) {
-    RE.restorerange();;
+    RE.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
