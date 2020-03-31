@@ -143,17 +143,7 @@ RE.setTextBackgroundColor = function(color, uuid) {
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
     document.execCommand("copy");
-    RE.getTextSelected();
     RE.saveTags(uuid);
-};
-
-RE.getTextSelected = function(){
-   RE.editor.addEventListener('mouseup',
-       function(e) {
-           var text = document.getSelection().toString();
-           alert(text);
-       }
-    );
 }
 
 RE.saveTags = function(uuid){
@@ -250,11 +240,13 @@ RE.backuprange = function(){
 
 RE.restorerange = function(){
     var selection = window.getSelection();
+    var selectString = window.getSelection().toString();
     selection.removeAllRanges();
     var range = document.createRange();
     range.setStart(RE.currentSelection.startContainer, RE.currentSelection.startOffset);
     range.setEnd(RE.currentSelection.endContainer, RE.currentSelection.endOffset);
     selection.addRange(range);
+    alert(selectString);
 }
 
 RE.enabledEditingItems = function(e) {
