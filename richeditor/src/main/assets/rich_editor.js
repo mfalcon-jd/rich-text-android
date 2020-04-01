@@ -137,7 +137,7 @@ RE.setTextColor = function(color) {
     document.execCommand("styleWithCSS", null, false);
 }
 
-RE.setTextBackgroundColor = function(color, uuid) {
+RE.setTextBackgroundColor = function(color, uuid, text) {
     RE.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
@@ -240,13 +240,23 @@ RE.backuprange = function(){
 
 RE.restorerange = function(){
     var selection = window.getSelection();
-    var selectString = window.getSelection().toString();
+    selection.removeAllRanges();
+    var range = document.createRange();
+    range.setStart(RE.currentSelection.startContainer, RE.currentSelection.startOffset);
+    range.setEnd(RE.currentSelection.endContainer, RE.currentSelection.endOffset);
+    selection.addRange(range);
+}
+
+RE.selectedValue = function(){
+    var selection = window.getSelection();
+    selectString = window.getSelection().toString();
     selection.removeAllRanges();
     var range = document.createRange();
     range.setStart(RE.currentSelection.startContainer, RE.currentSelection.startOffset);
     range.setEnd(RE.currentSelection.endContainer, RE.currentSelection.endOffset);
     selection.addRange(range);
     alert(selectString);
+    return selectString;
 }
 
 RE.enabledEditingItems = function(e) {

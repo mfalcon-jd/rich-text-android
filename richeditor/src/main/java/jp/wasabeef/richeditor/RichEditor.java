@@ -316,6 +316,7 @@ public class RichEditor extends WebView {
 
     String hex = convertHexColorString(color);
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
+    exec("javaScript:RE.selectedValue()");
   }
 
   public void setFontSize(int fontSize) {
