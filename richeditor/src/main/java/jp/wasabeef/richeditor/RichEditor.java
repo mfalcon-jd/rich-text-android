@@ -441,7 +441,7 @@ public class RichEditor extends WebView {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
-          System.out.println("VALUEEUUEUEUEUEUE: " + s);
+          Log.d("JAVASCRIPT: ", s);
         }
       });
     } else {

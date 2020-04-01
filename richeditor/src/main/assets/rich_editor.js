@@ -247,6 +247,7 @@ RE.restorerange = function(){
     selection.addRange(range);
 }
 
+//Funcion para guardar lo seleccionado
 RE.selectedValue = function(){
     var selectString = window.getSelection().toString();
     return selectString;
