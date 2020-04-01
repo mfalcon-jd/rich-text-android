@@ -313,7 +313,6 @@ public class RichEditor extends WebView {
   //Metodo para agregar fondo al texto
   public void setTextBackgroundColor(int color, String uuid) {
     exec("javascript:RE.prepareInsert();");
-
     String hex = convertHexColorString(color);
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
     exec("javaScript:RE.selectedValue()");

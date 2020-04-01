@@ -249,7 +249,7 @@ RE.restorerange = function(){
 
 RE.selectedValue = function(){
     var selection = window.getSelection();
-    selectString = window.getSelection().toString();
+    var selectString = window.getSelection().toString();
     selection.removeAllRanges();
     var range = document.createRange();
     range.setStart(RE.currentSelection.startContainer, RE.currentSelection.startOffset);
