@@ -312,11 +312,13 @@ public class RichEditor extends WebView {
   }
 
   //Metodo para agregar fondo al texto
-  public void setTextBackgroundColor(int color, String uuid, String value) {
+  public String setTextBackgroundColor(int color, String uuid, String value) {
+    String textoSeleccionado;
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
-    execSelected("javaScript: RE.selectedValue()");
+    textoSeleccionado = execSelected("javaScript: RE.selectedValue()");
+    return textoSeleccionado;
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -424,29 +426,34 @@ public class RichEditor extends WebView {
   }
 
   //Métodos especiales para ejecucion y obtener el valor de la cadena
-  protected void execSelected(final String trigger) {
+  protected String execSelected(final String trigger) {
+    final String[] value = new String[1];
     if (isReady) {
-      loadSelected(trigger);
+      value[0] = loadSelected(trigger);
     } else {
       postDelayed(new Runnable() {
         @Override public void run() {
-          execSelected(trigger);
+          value[0] = execSelected(trigger);
         }
       }, 100);
     }
+    return value[0];
   }
 
-  private void loadSelected(String trigger) {
+  private String loadSelected(String trigger) {
+    final String[] value = new String[1];
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
-          Log.d("JAVASCRIPT: ", s);
+          value[0] = s;
+          //Log.d("JAVASCRIPT: ", s);
         }
       });
     } else {
       loadUrl(trigger);
     }
+    return value[0];
   }
 
   protected class EditorWebViewClient extends WebViewClient {
