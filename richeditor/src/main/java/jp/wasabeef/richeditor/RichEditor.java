@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -311,13 +312,11 @@ public class RichEditor extends WebView {
   }
 
   //Metodo para agregar fondo al texto
-  public String setTextBackgroundColor(int color, String uuid) {
+  public void setTextBackgroundColor(int color, String uuid, String value) {
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
-    String texto = "";
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
-    texto = execfunc("javaScript:RE.selectedValue()");
-    return texto;
+    execSelected("javaScript: RE.selectedValue()");
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -416,23 +415,35 @@ public class RichEditor extends WebView {
     }
   }
 
-  protected String execfunc(final String trigger) {
-    if (isReady) {
-      load(trigger);
-    } else {
-      postDelayed(new Runnable() {
-        @Override public void run() {
-          execfunc(trigger);
-        }
-      }, 100);
-    }
-    return trigger;
-  }
-
-
   private void load(String trigger) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, null);
+    } else {
+      loadUrl(trigger);
+    }
+  }
+
+  //Métodos especiales para ejecucion y obtener el valor de la cadena
+  protected void execSelected(final String trigger) {
+    if (isReady) {
+      loadSelected(trigger);
+    } else {
+      postDelayed(new Runnable() {
+        @Override public void run() {
+          execSelected(trigger);
+        }
+      }, 100);
+    }
+  }
+
+  private void loadSelected(String trigger) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      evaluateJavascript(trigger, new ValueCallback<String>() {
+        @Override
+        public void onReceiveValue(String s) {
+          System.out.println("VALUEEUUEUEUEUEUE: " + s);
+        }
+      });
     } else {
       loadUrl(trigger);
     }
