@@ -2,6 +2,7 @@ package jp.wasabeef.richeditor;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -39,6 +40,8 @@ import java.util.Locale;
  */
 
 public class RichEditor extends WebView {
+
+  SharedPreferences sharedPreferences;
 
   public enum Type {
     BOLD,
@@ -312,14 +315,11 @@ public class RichEditor extends WebView {
   }
 
   //Metodo para agregar fondo al texto
-  public String setTextBackgroundColor(int color, String uuid) {
-    String value;
+  public void setTextBackgroundColor(int color, String uuid) {
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
-    value = execSelected("javaScript: RE.selectedValue()");
-    Log.d("TEXTBACKGROUD JS", value);
-    return value;
+    execSelected("javaScript: RE.selectedValue()");
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -427,36 +427,32 @@ public class RichEditor extends WebView {
   }
 
   //Métodos especiales para ejecucion y obtener el valor de la cadena
-  protected String execSelected(final String trigger) {
-    final String[] value = new String[1];
+  protected void execSelected(final String trigger) {
     if (isReady) {
-      value[0] = loadSelected(trigger);
+      loadSelected(trigger);
     } else {
       postDelayed(new Runnable() {
         @Override public void run() {
-          value[0] = execSelected(trigger);
         }
       }, 100);
     }
-    Log.d("execSelected JS", value[0]);
-    return value[0];
   }
 
-  private String loadSelected(String trigger) {
-    final String[] value = new String[1];
+  private void loadSelected(String trigger) {
+    sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
+    final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
-          value[0] = s;
+          editor.putString("texto_seleccionado", s);
+          editor.commit();
           //Log.d("JAVASCRIPT: ", s);
         }
       });
     } else {
       loadUrl(trigger);
     }
-    Log.d("loadSelected JS", value[0]);
-    return value[0];
   }
 
   protected class EditorWebViewClient extends WebViewClient {
