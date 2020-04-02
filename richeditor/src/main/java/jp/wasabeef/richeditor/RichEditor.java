@@ -312,13 +312,14 @@ public class RichEditor extends WebView {
   }
 
   //Metodo para agregar fondo al texto
-  public String setTextBackgroundColor(int color, String uuid, String value) {
-    String textoSeleccionado;
+  public String setTextBackgroundColor(int color, String uuid) {
+    String value;
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
-    textoSeleccionado = execSelected("javaScript: RE.selectedValue()");
-    return textoSeleccionado;
+    value = execSelected("javaScript: RE.selectedValue()");
+    Log.d("TEXTBACKGROUD JS", value);
+    return value;
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -437,6 +438,7 @@ public class RichEditor extends WebView {
         }
       }, 100);
     }
+    Log.d("execSelected JS", value[0]);
     return value[0];
   }
 
@@ -453,6 +455,7 @@ public class RichEditor extends WebView {
     } else {
       loadUrl(trigger);
     }
+    Log.d("loadSelected JS", value[0]);
     return value[0];
   }
 
