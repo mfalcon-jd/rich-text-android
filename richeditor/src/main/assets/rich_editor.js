@@ -137,12 +137,11 @@ RE.setTextColor = function(color) {
     document.execCommand("styleWithCSS", null, false);
 }
 
-RE.setTextBackgroundColor = function(color, uuid, text) {
+RE.setTextBackgroundColor = function(color, uuid) {
     RE.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
-    document.execCommand("copy");
     RE.saveTags(uuid);
 }
 
