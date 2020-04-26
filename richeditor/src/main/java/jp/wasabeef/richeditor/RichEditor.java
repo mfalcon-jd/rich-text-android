@@ -318,8 +318,9 @@ public class RichEditor extends WebView {
   public void setTextBackgroundColor(int color, String uuid) {
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
-    exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
+    exec("javascript:RE.setTextBackgroundColor('" + hex + "');");
     execSelected("javaScript: RE.selectedValue()");
+    exec("javascript:RE.saveTags('" + uuid + "');");
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
