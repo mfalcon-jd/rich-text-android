@@ -147,6 +147,7 @@ RE.setTextBackgroundColor = function(color) {
 
 RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
+    alert(array.length);
     for (var i=0; i<array.length; i++)
     {
         var atributo = array[i].getAttribute('data-id')
