@@ -318,9 +318,12 @@ public class RichEditor extends WebView {
   public void setTextBackgroundColor(int color, String uuid) {
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
-    exec("javascript:RE.setTextBackgroundColor('" + hex + "');");
+    exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
     execSelected("javaScript: RE.selectedValue()");
-    exec("javascript:RE.saveTags('" + uuid + "');");
+  }
+
+  public void hasRangeSelection(){
+    execTextSelected("javascript:RE.rangeSelectionExists();");
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -455,6 +458,35 @@ public class RichEditor extends WebView {
       loadUrl(trigger);
     }
   }
+
+  //MMetodo para saber si se tiene seleccionado un texto
+  protected void execTextSelected(final String trigger) {
+    if (isReady) {
+      loadTextSelected(trigger);
+    } else {
+      postDelayed(new Runnable() {
+        @Override public void run() {
+        }
+      }, 100);
+    }
+  }
+
+  private void loadTextSelected(String trigger) {
+    sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
+    final SharedPreferences.Editor editor = sharedPreferences.edit();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      evaluateJavascript(trigger, new ValueCallback<String>() {
+        @Override
+        public void onReceiveValue(String s) {
+          editor.putString("esta_seleccionado", s);
+          editor.commit();
+        }
+      });
+    } else {
+      loadUrl(trigger);
+    }
+  }
+
 
   protected class EditorWebViewClient extends WebViewClient {
     @Override public void onPageFinished(WebView view, String url) {

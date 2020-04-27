@@ -90,6 +90,16 @@ RE.setInputEnabled = function(inputEnabled) {
     RE.editor.contentEditable = String(inputEnabled);
 }
 
+//looks specifically for a Range selection and not a Caret selection
+RE.rangeSelectionExists = function() {
+    //!! coerces a null to bool
+    var sel = document.getSelection();
+    if (sel && sel.type == "Range") {
+        return true;
+    }
+    return false;
+};
+
 RE.undo = function() {
     document.execCommand('undo', false, null);
 }
@@ -137,12 +147,12 @@ RE.setTextColor = function(color) {
     document.execCommand("styleWithCSS", null, false);
 }
 
-RE.setTextBackgroundColor = function(color) {
+RE.setTextBackgroundColor = function(color, uuid) {
     RE.restorerange();
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
-    //RE.saveTags(uuid);
+    RE.saveTags(uuid);
 }
 
 RE.saveTags = function(uuid){
@@ -150,10 +160,8 @@ RE.saveTags = function(uuid){
     for (var i=0; i<array.length; i++)
     {
         var atributo = array[i].getAttribute('data-id')
-        alert(atributo);
         if (atributo === null) {
             array[i].setAttribute('data-id', uuid);
-            alert(uuid);
         }
     }
 }
