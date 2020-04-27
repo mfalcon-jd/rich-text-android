@@ -451,7 +451,7 @@ public class RichEditor extends WebView {
         public void onReceiveValue(String s) {
           editor.putString("texto_seleccionado", s);
           editor.commit();
-          //Log.d("JAVASCRIPT: ", s);
+          Log.d("JAVASCRIPT: ", s);
         }
       });
     } else {
