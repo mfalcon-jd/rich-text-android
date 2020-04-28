@@ -159,10 +159,9 @@ RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
     for (var i=0; i<array.length; i++)
     {
-        var atributo = array[i].getAttribute('data-id')
+        var atributo = array[i].getAttribute('data-id');
         if (atributo === null) {
-            array[i].setAttribute('data-id', uuid);
-            alert(array[i]);
+            array[i].setAttribute("data-id", uuid);
             alert(uuid);
         }
     }
