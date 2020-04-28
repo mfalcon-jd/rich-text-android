@@ -152,6 +152,7 @@ RE.setTextBackgroundColor = function(color, uuid) {
     document.execCommand("styleWithCSS", null, true);
     document.execCommand('hiliteColor', false, color);
     document.execCommand("styleWithCSS", null, false);
+    document.execCommand("copy", null, null);
     RE.saveTags(uuid);
 }
 
@@ -162,10 +163,10 @@ RE.saveTags = function(uuid){
     {
         var atributo = array[i].getAttribute('data-id');
         if (atributo === null) {
-            array[i].setAttribute("data-id", "mary-falcon-lopez");
+            array[i].setAttribute("data-id", uuid);
             alert(uuid);
         }
-        alert(atributo);
+        alert(array[i].getAttribute('data-id'));
     }
 }
 
