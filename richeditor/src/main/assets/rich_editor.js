@@ -158,6 +158,19 @@ RE.setTextBackgroundColor = function(color, uuid) {
 
 RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
+    var att = document.createAttribute("data-id");
+    att.value = uuid;
+    for (var i=0; i<array.length; i++)
+    {
+        var atributo = array[i].getAttribute("data-id");
+        if (atributo === null) {
+            array[i].setAttribute(att);
+        }
+    }
+}
+
+RE.saveTags2 = function(uuid){
+    var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
     alert(array.length);
     for (var i=0; i<array.length; i++)
     {
