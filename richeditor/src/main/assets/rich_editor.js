@@ -171,13 +171,12 @@ RE.saveTags2 = function(uuid){
 
 RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
-    alert(array.length);
     for (var i=0; i<array.length; i++)
     {
         var atributo = array[i].getAttribute('data-id');
         if (atributo === null) {
-            //array[i].setAttribute("data-id", uuid);
-            array[i]['data-id'] = uuid;
+            array[i].setAttribute("data-id", uuid);
+            //array[i]['data-id'] = uuid;
         }
     }
 }
