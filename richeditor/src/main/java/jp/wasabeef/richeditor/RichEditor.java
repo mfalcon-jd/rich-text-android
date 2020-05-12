@@ -42,7 +42,7 @@ import java.util.Locale;
 public class RichEditor extends WebView {
 
   SharedPreferences sharedPreferences;
-  final boolean[] flag = new boolean[1];
+  boolean flag;
 
   public enum Type {
     BOLD,
@@ -463,7 +463,6 @@ public class RichEditor extends WebView {
 
   //MMetodo para saber si se tiene seleccionado un texto
   protected boolean execTextSelected(final String trigger) {
-    boolean flag = false;
     if (isReady) {
       flag = loadTextSelected(trigger);
     } else {
@@ -476,8 +475,7 @@ public class RichEditor extends WebView {
   }
 
   private boolean loadTextSelected(String trigger) {
-
-
+    boolean flag;
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
@@ -487,12 +485,6 @@ public class RichEditor extends WebView {
           editor.putString("esta_seleccionado", s);
           editor.commit();
           Log.d("JAVASCRIPT  SELECT: ", s);
-         // if(s.equals("true")){
-         //   flag[0] = true;
-         // } else {
-         //   flag[0] =  false;
-        //  }
-          //flag[0] = getValue(s);
         }
       });
     } else {
@@ -501,13 +493,13 @@ public class RichEditor extends WebView {
     SharedPreferences sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
     String flagTexto = sharedPreferences.getString("esta_seleccionado", null);
     if(flagTexto.equals("true")){
-      flag[0] = true;
+      flag = true;
     } else {
-      flag[0] = false;
+      flag = false;
     }
 
     Log.d("JAVASCRIPT  FLAG: ", flagTexto);
-    return flag[0];
+    return flag;
   }
 
 
