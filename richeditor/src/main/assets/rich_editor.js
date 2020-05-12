@@ -96,11 +96,9 @@ RE.rangeSelectionExists = function() {
     var valor;
     var sel = document.getSelection();
     if (sel && sel.type == "Range") {
-        valor = "true"
-        return valor;
+        return true;
     }
-    valor = "false";
-    return valor;
+    return false;
 };
 
 RE.undo = function() {
