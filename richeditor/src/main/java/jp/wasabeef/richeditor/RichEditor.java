@@ -477,12 +477,13 @@ public class RichEditor extends WebView {
 
   private boolean loadTextSelected(String trigger) {
 
-    sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
-    final SharedPreferences.Editor editor = sharedPreferences.edit();
+
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
+          sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
+          final SharedPreferences.Editor editor = sharedPreferences.edit();
           editor.putString("esta_seleccionado", s);
           editor.commit();
           Log.d("JAVASCRIPT  SELECT: ", s);
