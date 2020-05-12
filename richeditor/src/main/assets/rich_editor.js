@@ -93,11 +93,14 @@ RE.setInputEnabled = function(inputEnabled) {
 //looks specifically for a Range selection and not a Caret selection
 RE.rangeSelectionExists = function() {
     //!! coerces a null to bool
+    var valor;
     var sel = document.getSelection();
     if (sel && sel.type == "Range") {
-        return true;
+        valor = "true"
+        return valor;
     }
-    return false;
+    valor = "false";
+    return valor;
 };
 
 RE.undo = function() {
