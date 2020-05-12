@@ -43,6 +43,7 @@ public class RichEditor extends WebView {
 
   SharedPreferences sharedPreferences;
   boolean flag;
+  String testValueOutside;
 
   public enum Type {
     BOLD,
@@ -485,6 +486,7 @@ public class RichEditor extends WebView {
           editor.putString("esta_seleccionado", s);
           editor.commit();
           Log.d("JAVASCRIPT  SELECT: ", s);
+          testValueOutside = s;
         }
       });
     } else {
@@ -498,7 +500,7 @@ public class RichEditor extends WebView {
       flag = false;
     }
 
-    Log.d("JAVASCRIPT  FLAG: ", flagTexto);
+    Log.d("JAVASCRIPT  FLAG: ", testValueOutside);
     return flag;
   }
 
