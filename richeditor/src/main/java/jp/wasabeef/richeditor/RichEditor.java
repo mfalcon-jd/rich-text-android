@@ -322,8 +322,9 @@ public class RichEditor extends WebView {
     execSelected("javaScript: RE.selectedValue()");
   }
 
-  public void hasRangeSelection(){
-    execTextSelected("javascript:RE.rangeSelectionExists();");
+  public boolean hasRangeSelection(){
+    boolean flag =  execTextSelected("javascript:RE.rangeSelectionExists();");
+    return flag;
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -460,18 +461,21 @@ public class RichEditor extends WebView {
   }
 
   //MMetodo para saber si se tiene seleccionado un texto
-  protected void execTextSelected(final String trigger) {
+  protected boolean execTextSelected(final String trigger) {
+    boolean flag = false;
     if (isReady) {
-      loadTextSelected(trigger);
+      flag = loadTextSelected(trigger);
     } else {
       postDelayed(new Runnable() {
         @Override public void run() {
         }
       }, 100);
     }
+    return flag;
   }
 
-  private void loadTextSelected(String trigger) {
+  private boolean loadTextSelected(String trigger) {
+    final boolean[] flag = new boolean[1];
     sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
     final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -481,11 +485,17 @@ public class RichEditor extends WebView {
           editor.putString("esta_seleccionado", s);
           editor.commit();
           Log.d("JAVASCRIPT  SELECT: ", s);
+          if(s.equals("true")){
+            flag[0] = true;
+          } else {
+            flag[0] =  false;
+          }
         }
       });
     } else {
       loadUrl(trigger);
     }
+    return flag[0];
   }
 
 
