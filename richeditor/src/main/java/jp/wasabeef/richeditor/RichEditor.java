@@ -490,6 +490,7 @@ public class RichEditor extends WebView {
           } else {
             flag[0] =  false;
           }
+          Log.d("JAVASCRIPT  FLAG: ", String.valueOf(flag[0]));
         }
       });
     } else {
