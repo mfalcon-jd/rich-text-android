@@ -42,6 +42,7 @@ import java.util.Locale;
 public class RichEditor extends WebView {
 
   SharedPreferences sharedPreferences;
+  final boolean[] flag = new boolean[1];
 
   public enum Type {
     BOLD,
@@ -475,7 +476,7 @@ public class RichEditor extends WebView {
   }
 
   private boolean loadTextSelected(String trigger) {
-    final boolean[] flag = new boolean[1];
+
     //sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
     //final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
