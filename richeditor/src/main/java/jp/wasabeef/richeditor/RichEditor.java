@@ -500,7 +500,7 @@ public class RichEditor extends WebView {
       flag = false;
     }
 
-    Log.d("JAVASCRIPT  FLAG: ", testValueOutside);
+    Log.d("JAVASCRIPT  FLAG: ", String.valueOf(testValueOutside));
     return flag;
   }
 
