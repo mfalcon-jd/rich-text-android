@@ -477,38 +477,36 @@ public class RichEditor extends WebView {
 
   private boolean loadTextSelected(String trigger) {
 
-    //sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
-    //final SharedPreferences.Editor editor = sharedPreferences.edit();
+    sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
+    final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
-          //editor.putString("esta_seleccionado", s);
-         // editor.commit();
+          editor.putString("esta_seleccionado", s);
+          editor.commit();
           Log.d("JAVASCRIPT  SELECT: ", s);
          // if(s.equals("true")){
          //   flag[0] = true;
          // } else {
          //   flag[0] =  false;
         //  }
-          flag[0] = getValue(s);
+          //flag[0] = getValue(s);
         }
       });
     } else {
       loadUrl(trigger);
     }
-    Log.d("JAVASCRIPT  FLAG: ", String.valueOf(flag[0]));
-    return flag[0];
-  }
-
-  public boolean getValue(String data) {
-    boolean flag;
-    if(data.equals("true")){
-      flag = true;
+    SharedPreferences sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
+    String flagTexto = sharedPreferences.getString("esta_seleccionado", null);
+    if(flagTexto.equals("true")){
+      flag[0] = true;
     } else {
-      flag = false;
+      flag[0] = false;
     }
-    return flag;
+
+    Log.d("JAVASCRIPT  FLAG: ", flagTexto);
+    return flag[0];
   }
 
 
