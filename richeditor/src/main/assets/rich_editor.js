@@ -155,6 +155,7 @@ RE.setTextBackgroundColor = function(color, uuid) {
     document.execCommand("styleWithCSS", null, false);
     document.execCommand("copy", null, null);
     RE.saveTags(uuid);
+    alert(RE.editor.outerHTML);
 }
 
 RE.saveTags = function(uuid){
@@ -164,10 +165,8 @@ RE.saveTags = function(uuid){
         var atributo = array[i].getAttribute('data-id');
         if (atributo === null) {
             array[i].setAttribute("data-id", uuid);
-            alert(array[i].outerHTML);
         }
     }
-    return array;
 }
 
 RE.setFontSize = function(fontSize){
