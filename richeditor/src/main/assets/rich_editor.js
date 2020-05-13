@@ -178,9 +178,9 @@ RE.saveTags = function(uuid){
             valor.setAttribute("data-id", uuid);
         }
     });*/
+    alert(array.length);
     for (var i=0; i<array.length; i++)
     {
-        alert(array[i]);
         var atributo = array[i].getAttribute('data-id');
         if (atributo === null) {
             array[i].setAttributeNode("data-id", uuid);
