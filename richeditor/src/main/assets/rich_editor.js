@@ -185,6 +185,7 @@ RE.saveTags = function(uuid){
         if (atributo === null) {
             array[i].setAttributeNode("data-id", uuid);
             //array[i]['data-id'] = uuid;
+            alert("Soy nulo");
         }
     }
 }
