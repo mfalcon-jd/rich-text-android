@@ -157,38 +157,17 @@ RE.setTextBackgroundColor = function(color, uuid) {
     RE.saveTags(uuid);
 }
 
-RE.saveTags2 = function(uuid){
-    var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
-    var att = document.createAttribute("data-id");
-    att.value = uuid;
-    for (var i=0; i<array.length; i++)
-    {
-        var atributo = array[i].getAttribute("data-id");
-        if (atributo === null) {
-            array[i].setAttribute(att);
-        }
-    }
-}
-
 RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
-    /*array.forEach(function(valor, index, array){
-        var atributo = valor.getAttribute('data-id');
-        if(atributo === null){
-            valor.setAttribute("data-id", uuid);
-        }
-    });*/
     for (var i=0; i<array.length; i++)
     {
         var atributo = array[i].getAttribute('data-id');
-        alert(atributo);
         if (atributo === null) {
-            alert(array[i].outerHTML);
             array[i].setAttribute("data-id", uuid);
-            //array[i]['data-id'] = uuid;
             alert(array[i].outerHTML);
         }
     }
+    return array;
 }
 
 RE.setFontSize = function(fontSize){
