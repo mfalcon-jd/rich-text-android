@@ -178,15 +178,16 @@ RE.saveTags = function(uuid){
             valor.setAttribute("data-id", uuid);
         }
     });*/
-    alert(array.length);
     for (var i=0; i<array.length; i++)
     {
         var atributo = array[i].getAttribute('data-id');
+        alert(atributo);
         if (atributo === null) {
-            array[i].setAttributeNode("data-id", uuid);
+            array[i].setAttribute("data-id", uuid);
             //array[i]['data-id'] = uuid;
             alert("Soy nulo");
         }
+        alert("no soy nulo");
     }
 }
 
