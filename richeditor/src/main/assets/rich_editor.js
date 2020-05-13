@@ -186,7 +186,7 @@ RE.saveTags = function(uuid){
             alert(array[i].outerHTML);
             array[i].setAttribute("data-id", uuid);
             //array[i]['data-id'] = uuid;
-            alert("Soy nulo");
+            alert(array[i].outerHTML);
         }
     }
 }
