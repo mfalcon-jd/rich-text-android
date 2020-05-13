@@ -172,20 +172,21 @@ RE.saveTags2 = function(uuid){
 
 RE.saveTags = function(uuid){
     var array = document.querySelectorAll('strong[style^="background-color: rgb"], span[style^="background-color: rgb"]');
-    array.forEach(function(valor, index, array){
+    /*array.forEach(function(valor, index, array){
         var atributo = valor.getAttribute('data-id');
         if(atributo === null){
             valor.setAttribute("data-id", uuid);
         }
-    });
-    /*for (var i=0; i<array.length; i++)
+    });*/
+    for (var i=0; i<array.length; i++)
     {
+        alert(array[i]);
         var atributo = array[i].getAttribute('data-id');
         if (atributo === null) {
             array[i].setAttributeNode("data-id", uuid);
             //array[i]['data-id'] = uuid;
         }
-    }*/
+    }
 }
 
 RE.setFontSize = function(fontSize){
