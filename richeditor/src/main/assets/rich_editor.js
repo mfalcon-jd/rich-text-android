@@ -183,7 +183,7 @@ RE.saveTags = function(uuid){
         var atributo = array[i].getAttribute('data-id');
         alert(atributo);
         if (atributo === null) {
-            alert(array[i].innerHTML);
+            alert(array[i].outerHTML);
             array[i].setAttribute("data-id", uuid);
             //array[i]['data-id'] = uuid;
             alert("Soy nulo");
