@@ -321,7 +321,7 @@ public class RichEditor extends WebView {
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
     exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
-    execSelected("javaScript: RE.selectedValue()");
+    execSelected("javaScript: RE.selectedValue();");
   }
 
   public void hasRangeSelection(){
