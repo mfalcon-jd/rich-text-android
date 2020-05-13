@@ -324,9 +324,8 @@ public class RichEditor extends WebView {
     execSelected("javaScript: RE.selectedValue()");
   }
 
-  public boolean hasRangeSelection(){
-    boolean flag =  execTextSelected("javascript:RE.rangeSelectionExists();");
-    return flag;
+  public void hasRangeSelection(){
+   execTextSelected("javascript:RE.rangeSelectionExists();");
   }
 
   /*public void setTextBackgroundColor(int color, String uuid) {
@@ -463,20 +462,18 @@ public class RichEditor extends WebView {
   }
 
   //MMetodo para saber si se tiene seleccionado un texto
-  protected boolean execTextSelected(final String trigger) {
+  protected void execTextSelected(final String trigger) {
     if (isReady) {
-      flag = loadTextSelected(trigger);
+      loadTextSelected(trigger);
     } else {
       postDelayed(new Runnable() {
         @Override public void run() {
         }
       }, 100);
     }
-    return flag;
   }
 
-  private boolean loadTextSelected(String trigger) {
-    boolean flag;
+  private void loadTextSelected(String trigger) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
@@ -486,22 +483,11 @@ public class RichEditor extends WebView {
           editor.putString("esta_seleccionado", s);
           editor.commit();
           Log.d("JAVASCRIPT  SELECT: ", s);
-          testValueOutside = s;
         }
       });
     } else {
       loadUrl(trigger);
     }
-    SharedPreferences sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
-    String flagTexto = sharedPreferences.getString("esta_seleccionado", null);
-    if(flagTexto.equals("true")){
-      flag = true;
-    } else {
-      flag = false;
-    }
-
-    Log.d("JAVASCRIPT  FLAG: ", String.valueOf(testValueOutside));
-    return flag;
   }
 
 
