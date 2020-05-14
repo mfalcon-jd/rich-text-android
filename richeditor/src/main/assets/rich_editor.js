@@ -155,7 +155,7 @@ RE.setTextBackgroundColor = function(color, uuid) {
     document.execCommand("styleWithCSS", null, false);
     document.execCommand("copy", null, null);
     RE.saveTags(uuid);
-    return RE.editor.innerHTML;
+    return RE.editor.textContent;
 }
 
 RE.saveTags = function(uuid){
