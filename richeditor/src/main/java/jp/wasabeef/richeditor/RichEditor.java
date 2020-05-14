@@ -42,8 +42,6 @@ import java.util.Locale;
 public class RichEditor extends WebView {
 
   SharedPreferences sharedPreferences;
-  boolean flag;
-  String testValueOutside;
 
   public enum Type {
     BOLD,
@@ -320,7 +318,7 @@ public class RichEditor extends WebView {
   public void setTextBackgroundColor(int color, String uuid) {
     exec("javascript:RE.prepareInsert();");
     String hex = convertHexColorString(color);
-    exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
+    execColor("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
     execSelected("javaScript: RE.selectedValue();");
   }
 
@@ -427,6 +425,32 @@ public class RichEditor extends WebView {
   private void load(String trigger) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, null);
+    } else {
+      loadUrl(trigger);
+    }
+  }
+
+  //Método especial para background color
+  protected void execColor(final String trigger) {
+    if (isReady) {
+      loadColor(trigger);
+    } else {
+      postDelayed(new Runnable() {
+        @Override public void run() {
+          exec(trigger);
+        }
+      }, 100);
+    }
+  }
+
+  private void loadColor(String trigger) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+      evaluateJavascript(trigger, new ValueCallback<String>() {
+        @Override
+        public void onReceiveValue(String s) {
+          Log.d("JAVA-SCRIPT-DATA-ID", s);
+        }
+      });
     } else {
       loadUrl(trigger);
     }
