@@ -326,15 +326,6 @@ public class RichEditor extends WebView {
    execTextSelected("javascript:RE.rangeSelectionExists();");
   }
 
-  /*public void setTextBackgroundColor(int color, String uuid) {
-    exec("javascript:RE.prepareInsert();");
-    String hex = convertHexColorString(color);
-    String texto = "";
-    exec("javascript:RE.setTextBackgroundColor('" + hex + "','" + uuid + "');");
-    texto = execfunc("javaScript:RE.selectedValue()");
-  }
-*/
-
   public void setFontSize(int fontSize) {
     if (fontSize > 7 || fontSize < 1) {
       Log.e("RichEditor", "Font size should have a value between 1-7");
@@ -452,7 +443,6 @@ public class RichEditor extends WebView {
         public void onReceiveValue(String s) {
           editor.putString("html", s);
           editor.commit();
-          Log.d("JAVA-SCRIPT-DATA-ID", s);
         }
       });
     } else {
@@ -481,7 +471,6 @@ public class RichEditor extends WebView {
         public void onReceiveValue(String s) {
           editor.putString("texto_seleccionado", s);
           editor.commit();
-          Log.d("JAVASCRIPT: ", s);
         }
       });
     } else {
@@ -506,11 +495,11 @@ public class RichEditor extends WebView {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
-          sharedPreferences = getContext().getSharedPreferences("WikileyTextSelected", Context.MODE_PRIVATE);
+          sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
           final SharedPreferences.Editor editor = sharedPreferences.edit();
           editor.putString("esta_seleccionado", s);
           editor.commit();
-          Log.d("JAVASCRIPT  SELECT: ", s);
+          Log.d("LOG-ESTA-SELECCIONADO", s);
         }
       });
     } else {
