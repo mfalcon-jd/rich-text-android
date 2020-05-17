@@ -323,7 +323,7 @@ public class RichEditor extends WebView {
   }
 
   public void hasRangeSelection(){
-   execTextSelected("javascript:RE.rangeSelectionExists();");
+   execTextSelected("javascript:RE.selectedValue();");
   }
 
   public void setFontSize(int fontSize) {
@@ -497,9 +497,9 @@ public class RichEditor extends WebView {
         public void onReceiveValue(String s) {
           sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
           final SharedPreferences.Editor editor = sharedPreferences.edit();
-          editor.putString("esta_seleccionado", s);
-          editor.commit();
-          Log.d("LOG-ESTA-SELECCIONADO", s);
+          //editor.putString("esta_seleccionado", String.valueOf(s.length()));
+          //editor.commit();
+          Log.d("LOG-ESTA-SELECCIONADO", String.valueOf(s.length()));
         }
       });
     } else {
