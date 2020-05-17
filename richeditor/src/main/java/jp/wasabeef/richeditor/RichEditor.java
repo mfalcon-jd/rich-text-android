@@ -495,15 +495,9 @@ public class RichEditor extends WebView {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
-          boolean flagSeleccionada;
-          if(s.length() > 2){
-            flagSeleccionada = true;
-          } else {
-            flagSeleccionada = false;
-          }
           sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
           final SharedPreferences.Editor editor = sharedPreferences.edit();
-          editor.putBoolean("esta_seleccionados", flagSeleccionada);
+          editor.putInt("esta_seleccionados", s.length());
           editor.commit();
           Log.d("LOG-ESTA-SELECCIONADO", String.valueOf(s.length()));
         }
