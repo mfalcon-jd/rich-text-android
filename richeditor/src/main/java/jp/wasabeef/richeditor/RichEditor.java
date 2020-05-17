@@ -497,7 +497,7 @@ public class RichEditor extends WebView {
         public void onReceiveValue(String s) {
           sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
           final SharedPreferences.Editor editor = sharedPreferences.edit();
-          editor.putInt("esta_seleccionados", s.length());
+          editor.putString("valida_seleccionado", String.valueOf(s.length()));
           editor.commit();
           Log.d("LOG-ESTA-SELECCIONADO", String.valueOf(s.length()));
         }
