@@ -497,6 +497,7 @@ public class RichEditor extends WebView {
       evaluateJavascript(trigger, new ValueCallback<String>() {
         @Override
         public void onReceiveValue(String s) {
+          editor.putString("nombre",   s + " MARY");
           editor.putString("valida_seleccionado", String.valueOf(s.length()));
           editor.commit();
           Log.d("LOG-ESTA-SELECCIONADO", String.valueOf(s.length()));
