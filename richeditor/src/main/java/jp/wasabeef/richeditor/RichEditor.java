@@ -41,8 +41,6 @@ import java.util.Locale;
 
 public class RichEditor extends WebView {
 
-  SharedPreferences sharedPreferences;
-
   public enum Type {
     BOLD,
     ITALIC,
@@ -435,7 +433,7 @@ public class RichEditor extends WebView {
   }
 
   private void loadColor(String trigger) {
-    sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
+    SharedPreferences sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
     final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
@@ -463,7 +461,7 @@ public class RichEditor extends WebView {
   }
 
   private void loadSelected(String trigger) {
-    sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
+    SharedPreferences sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
     final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
@@ -491,7 +489,7 @@ public class RichEditor extends WebView {
   }
 
   private void loadTextSelected(String trigger) {
-    sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
+    SharedPreferences sharedPreferences = getContext().getSharedPreferences("WikileyMarcador", Context.MODE_PRIVATE);
     final SharedPreferences.Editor editor = sharedPreferences.edit();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       evaluateJavascript(trigger, new ValueCallback<String>() {
